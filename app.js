@@ -130,6 +130,14 @@ function confirmPayment(){
 }
 window.confirmPayment=confirmPayment;
 
+function resetPayment(){
+  ["cart", "checkoutStep", "currency", "paid", "nickname"].forEach(key => {
+    localStorage.removeItem(`maxshop.${key}`);
+  });
+  location.href="index.html";
+}
+window.resetPayment=resetPayment;
+
 document.addEventListener("DOMContentLoaded",()=>{
   document.body.dataset.theme=state.theme;
   const nickname = qs("#nickname");
