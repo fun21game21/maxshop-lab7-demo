@@ -150,13 +150,35 @@ function confirmPayment(){
 }
 window.confirmPayment=confirmPayment;
 
-function resetPayment(){
+function clearCompletedCheckout(){
   ["cart", "checkoutStep", "currency", "paid", "nickname", "orderId"].forEach(key => {
     localStorage.removeItem(`maxshop.${key}`);
   });
-  location.href="index.html";
+  state.cart = {name:'Кит «Иммортал»', price:1290, qty:1};
+  state.checkoutStep = 1;
+  state.currency = "TON";
+  state.paid = false;
+  state.orderId = "";
 }
-window.resetPayment=resetPayment;
+
+// Leaving a completed checkout starts a fresh cart without touching order history.
+document.addEventListener("click", event => {
+  const link = event.target.closest("a[href]");
+  if(!link || !state.paid) return;
+  const destination = new URL(link.href, location.href);
+  if(destination.origin === location.origin && destination.pathname !== location.pathname){
+    clearCompletedCheckout();
+  }
+});
+
+// Restore a fresh cart when Back returns to a cached success screen.
+window.addEventListener("pageshow", () => {
+  if(state.checkoutStep === 5 && localStorage.getItem("maxshop.paid") !== "1"){
+    clearCompletedCheckout();
+    renderCheckout();
+    renderPayment();
+  }
+});
 
 function readOrders(){
   try {
@@ -215,6 +237,7 @@ window.addEventListener("storage", event => {
 });
 
 document.addEventListener("DOMContentLoaded",()=>{
+  if(state.paid && !qs("[data-checkout]")) clearCompletedCheckout();
   renderView();
   document.body.dataset.theme=state.theme;
   const nickname = qs("#nickname");
