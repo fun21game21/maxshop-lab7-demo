@@ -5,22 +5,23 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#202522">
 <title>Кит Иммортал — MaxShop</title>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=orders-1">
 </head>
 <body data-theme="chromatic">
 
 <div class="app-shell">
   <div class="topline">
-    <div class="brand">
+    <a class="brand" href="index.html#catalog" aria-label="MaxShop — перейти в каталог">
       <div class="logo">M</div>
       <div><strong>MaxShop</strong><div class="small muted">цифровой магазин</div></div>
-    </div>
+    </a>
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
       <div class="theme-switch" title="Цветовая схема">
         <button onclick="setTheme('achromatic')">Ч/Б</button>
         <button onclick="setTheme('chromatic')">60/30/10</button>
         <button onclick="setTheme('triad')">Триада</button>
       </div>
+      <a class="btn secondary" href="index.html#orders" data-orders-link>Заказы</a>
       <a class="btn secondary" href="checkout.html">Корзина <span class="cart-badge">1</span></a>
     </div>
   </div>
@@ -56,5 +57,5 @@
   </section>
 
 </div>
-<script src="app.js?v=f702139"></script>
+<script src="app.js?v=orders-1"></script>
 </body></html>

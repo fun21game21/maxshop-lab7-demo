@@ -5,22 +5,23 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#202522">
 <title>Оформление заказа — MaxShop</title>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=orders-1">
 </head>
 <body data-theme="chromatic">
 <div class="app-shell">
   <div class="topline">
-    <div class="brand">
+    <a class="brand" href="index.html#catalog" aria-label="MaxShop — перейти в каталог">
       <div class="logo">M</div>
       <div><strong>MaxShop</strong><div class="small muted">цифровой магазин</div></div>
-    </div>
+    </a>
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
       <div class="theme-switch" title="Цветовая схема">
         <button onclick="setTheme('achromatic')">Ч/Б</button>
         <button onclick="setTheme('chromatic')">60/30/10</button>
         <button onclick="setTheme('triad')">Триада</button>
       </div>
-      <a class="btn secondary" href="index.html">Каталог</a>
+      <a class="btn secondary" href="index.html#orders" data-orders-link>Заказы</a>
+      <a class="btn secondary" href="index.html#catalog">Каталог</a>
     </div>
   </div>
 
@@ -66,7 +67,7 @@
 
       <section class="step-pane" data-step="4" data-payment>
         <div id="payView">
-          <div class="eyebrow">Шаг 4 · Заказ #128736</div>
+          <div class="eyebrow">Шаг 4 · Заказ #<span data-order-id>—</span></div>
           <h1>Оплата заказа</h1>
           <p class="muted">Выбрана валюта: <strong data-currency-label></strong>.</p>
           <p class="muted small" role="note">Тестовая оплата — не переводите средства.</p>
@@ -88,11 +89,12 @@
           <h1>Заказ принят в обработку</h1>
           <div class="order-card" style="text-align:left;max-width:720px;margin:26px auto 0">
             <div style="display:flex;justify-content:space-between;gap:16px;align-items:center">
-              <div><strong>Кит «Иммортал»</strong><div class="muted small">Заказ #128736 · <span data-currency-label></span></div></div>
+              <div><strong>Кит «Иммортал»</strong><div class="muted small">Заказ #<span data-order-id>—</span> · <span data-currency-label></span></div></div>
               <span class="status">Выдача в работе</span>
             </div>
             <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
-              <a class="btn" href="index.html">Вернуться в магазин</a>
+              <a class="btn" href="index.html#orders">Мои заказы</a>
+              <a class="btn secondary" href="index.html#catalog">Вернуться в магазин</a>
               <button class="btn secondary" onclick="resetPayment()">Сбросить оплату</button>
             </div>
           </div>
@@ -109,5 +111,5 @@
   </div>
 
 </div>
-<script src="app.js?v=f702139"></script>
+<script src="app.js?v=orders-1"></script>
 </body></html>

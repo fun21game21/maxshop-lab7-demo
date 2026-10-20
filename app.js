@@ -17,11 +17,13 @@ const state = {
   cart: readCart(),
   checkoutStep: Number.isInteger(savedStep) && savedStep >= 1 && savedStep <= 5 ? savedStep : 1,
   currency: currencies.includes(localStorage.getItem("maxshop.currency")) ? localStorage.getItem("maxshop.currency") : "TON",
+  orderId: localStorage.getItem("maxshop.orderId") || "",
   paid: localStorage.getItem("maxshop.paid") === "1",
   theme: themes.includes(localStorage.getItem("maxshop.theme")) ? localStorage.getItem("maxshop.theme") : "chromatic"
 };
 
 function save() {
+  localStorage.setItem("maxshop.orderId", state.orderId);
   localStorage.setItem("maxshop.cart", JSON.stringify(state.cart));
   localStorage.setItem("maxshop.checkoutStep", String(state.checkoutStep));
   localStorage.setItem("maxshop.currency", state.currency);
@@ -42,6 +44,7 @@ function addToCart(){
   state.cart = {name:'Кит «Иммортал»', price:1290, qty:1};
   state.checkoutStep = 1;
   state.paid = false;
+  state.orderId = "";
   save();
   location.href = "checkout.html";
 }
@@ -51,6 +54,7 @@ function renderCheckout(){
   const wrap = qs("[data-checkout]");
   if(!wrap) return;
   const total = state.cart.price * state.cart.qty;
+  qsa("[data-order-id]").forEach(el => el.textContent = state.orderId || "—");
 
   qsa("[data-step]").forEach(el => el.classList.toggle("active", Number(el.dataset.step)===state.checkoutStep));
   qsa("[data-stepdot]").forEach(el => el.classList.toggle("active", Number(el.dataset.stepdot)<=state.checkoutStep));
@@ -87,6 +91,10 @@ window.chooseCurrency=chooseCurrency;
 
 function goPayment(){
   if(!state.currency) state.currency="TON";
+  if(!state.orderId || state.paid){
+    state.orderId = Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2, 6).toUpperCase();
+    state.paid = false;
+  }
   state.checkoutStep=4;
   save();
   renderCheckout();
@@ -116,10 +124,22 @@ async function copyField(id, btn){
 }
 window.copyField=copyField;
 
+let paymentCheckPending = false;
 function confirmPayment(){
+  if(paymentCheckPending || state.paid || state.checkoutStep !== 4) return;
+  paymentCheckPending = true;
   const btn=qs("#checkPaymentBtn");
   if(btn){ btn.disabled=true; btn.textContent="Проверяем оплату…"; }
   setTimeout(()=>{
+    const orders = readOrders();
+    if(!orders.some(order => order.id === state.orderId)){
+      orders.unshift({id: state.orderId, name: state.cart.name, price: state.cart.price,
+        qty: state.cart.qty, currency: state.currency,
+        nickname: localStorage.getItem("maxshop.nickname") || "MaxPlayer",
+        createdAt: new Date().toISOString()});
+      localStorage.setItem("maxshop.orders", JSON.stringify(orders));
+    }
+    paymentCheckPending = false;
     state.paid=true;
     state.checkoutStep=5;
     save();
@@ -131,14 +151,71 @@ function confirmPayment(){
 window.confirmPayment=confirmPayment;
 
 function resetPayment(){
-  ["cart", "checkoutStep", "currency", "paid", "nickname"].forEach(key => {
+  ["cart", "checkoutStep", "currency", "paid", "nickname", "orderId"].forEach(key => {
     localStorage.removeItem(`maxshop.${key}`);
   });
   location.href="index.html";
 }
 window.resetPayment=resetPayment;
 
+function readOrders(){
+  try {
+    const orders = JSON.parse(localStorage.getItem("maxshop.orders") || "[]");
+    return Array.isArray(orders) ? orders.filter(order => order && typeof order.id === "string"
+      && typeof order.name === "string" && typeof order.nickname === "string"
+      && Number.isFinite(order.price) && order.price > 0
+      && Number.isSafeInteger(order.qty) && order.qty >= 1 && order.qty <= 99
+      && currencies.includes(order.currency) && Number.isFinite(Date.parse(order.createdAt))) : [];
+  } catch { return []; }
+}
+
+function renderOrders(){
+  const list = qs("#ordersList");
+  if(!list) return;
+  const orders = readOrders();
+  list.replaceChildren();
+  qs("#ordersEmpty").hidden = orders.length > 0;
+  orders.forEach(order => {
+    const card = document.createElement("article");
+    card.className = "order-card";
+    const title = document.createElement("h2");
+    title.textContent = "Заказ #" + order.id;
+    const status = document.createElement("span");
+    status.className = "status";
+    status.textContent = "Выдача в работе";
+    const header = document.createElement("div");
+    header.className = "order-heading";
+    header.append(title, status);
+    const product = document.createElement("p");
+    product.textContent = order.name + " · " + order.qty + " шт. · " + money(order.price * order.qty);
+    const details = document.createElement("p");
+    details.className = "muted small";
+    details.textContent = new Date(order.createdAt).toLocaleString("ru-RU") + " · " + order.currency + " · Ник: " + order.nickname;
+    card.append(header, product, details);
+    list.append(card);
+  });
+}
+
+function renderView(){
+  const ordersView = qs("#ordersView");
+  if(!ordersView) return;
+  const isOrders = location.hash === "#orders";
+  ordersView.hidden = !isOrders;
+  qs("#catalogView").hidden = isOrders;
+  qsa("[data-orders-link]").forEach(link => {
+    if(isOrders) link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
+  });
+  document.title = isOrders ? "Заказы — MaxShop" : "Главная — MaxShop";
+  if(isOrders){ renderOrders(); window.scrollTo(0, 0); }
+}
+window.addEventListener("hashchange", renderView);
+window.addEventListener("storage", event => {
+  if(event.key === "maxshop.orders" || event.key === null) renderOrders();
+});
+
 document.addEventListener("DOMContentLoaded",()=>{
+  renderView();
   document.body.dataset.theme=state.theme;
   const nickname = qs("#nickname");
   if(nickname) nickname.value = localStorage.getItem("maxshop.nickname") || "MaxPlayer";

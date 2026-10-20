@@ -205,3 +205,9 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-off
   .success{padding:26px 12px}
   .success .order-card>div:first-child{flex-wrap:wrap}
 }
+
+.orders-list{display:grid;gap:16px}
+.orders-list .order-card{margin-top:0;overflow-wrap:anywhere}
+.order-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.order-heading h2{font-size:20px;margin:0}
+[data-orders-link][aria-current="page"]{border-color:var(--accent);color:var(--accent)}
