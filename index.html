@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#202522">
+<title>Главная — MaxShop</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="chromatic">
+<div class="telegram-bar">
+  <div class="telegram-title"><span style="font-size:28px">×</span><span>MaxShop</span></div>
+  <div class="telegram-actions"><span>⌄</span><span>⋮</span></div>
+</div>
+
+<div class="app-shell">
+  <div class="notice demo-notice" role="note"><strong>Учебное демо.</strong> Оплата и выдача имитируются. Не отправляйте криптовалюту: адреса и QR-макет недействительны.</div>
+  <div class="topline">
+    <div class="brand">
+      <div class="logo">M</div>
+      <div><strong>MaxShop</strong><div class="small muted">цифровой магазин · Telegram Web App</div></div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <div class="theme-switch" title="Палитры из ЛР7">
+        <button onclick="setTheme('achromatic')">Ч/Б</button>
+        <button onclick="setTheme('chromatic')">60/30/10</button>
+        <button onclick="setTheme('triad')">Триада</button>
+      </div>
+      <a class="btn secondary" href="checkout.html">Корзина <span class="cart-badge">1</span></a>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Для игр. Для дела. Для вас.</div>
+      <h1>Маленькие покупки.<br>Большие возможности.</h1>
+      <p class="muted">Minecraft / DexLand, исходные коды, учебные проекты и небольшие утилиты — внутри одного понятного магазина.</p>
+      <a class="btn" href="#catalog">Посмотреть каталог →</a>
+    </div>
+    <div class="hero-art"><div class="code-card">&lt;/&gt;</div></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><div><div class="eyebrow">Категории</div><h2>С чего начнём?</h2></div></div>
+    <div class="category-grid">
+      <a class="category-card" href="#minecraft">
+        <div><strong>Minecraft / DexLand</strong><div class="muted small">Киты, топ-сеты и игровые услуги</div></div><strong>→</strong>
+      </a>
+      <a class="category-card" href="#programming">
+        <div><strong>Программирование</strong><div class="muted small">Исходники, учебные проекты и утилиты</div></div><strong>→</strong>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="catalog">
+    <div class="section-head"><div><div class="eyebrow">Каталог</div><h2>Найдите своё</h2></div><span class="muted small">6 демонстрационных товаров</span></div>
+    <div class="searchbar"><input class="input" id="search" aria-label="Поиск по каталогу" placeholder="Найти товар…"></div>
+    <div class="chips">
+      <button class="chip active">Все</button><button class="chip">Minecraft / DexLand</button><button class="chip">Программирование</button>
+    </div>
+
+    <div class="product-grid" style="margin-top:16px" id="minecraft">
+      <a class="product-card" href="product.html">
+        <div class="product-visual"><div class="product-symbol">◆</div></div>
+        <div class="product-body">
+          <div class="product-meta">Minecraft / DexLand</div><h3>Кит «Иммортал»</h3>
+          <p class="muted">Комплект для уверенного старта на DexLand.</p>
+          <div class="price-row"><span class="price">1 290 ₽</span><span class="btn" style="padding:8px 12px">Открыть</span></div>
+        </div>
+      </a>
+      <article class="product-card">
+        <div class="product-visual"><div class="product-symbol">&lt;/&gt;</div></div>
+        <div class="product-body"><div class="product-meta">Minecraft / DexLand</div><h3>Топ-сет</h3><p class="muted">Собранный набор экипировки.</p><div class="price-row"><span class="price">1 890 ₽</span><span>+</span></div></div>
+      </article>
+      <article class="product-card">
+        <div class="product-visual"><div class="product-symbol">⬢</div></div>
+        <div class="product-body"><div class="product-meta">Услуга</div><h3>Ферма мобов</h3><p class="muted">Индивидуальная постройка под ваш мир.</p><div class="price-row"><span class="price">3 490 ₽</span><span>+</span></div></div>
+      </article>
+    </div>
+
+    <div class="product-grid" style="margin-top:16px" id="programming">
+      <article class="product-card">
+        <div class="product-visual"><div class="product-symbol">Py</div></div>
+        <div class="product-body"><div class="product-meta">Программирование</div><h3>Алгоритмы на Python</h3><p class="muted">Примеры алгоритмов с пояснениями.</p><div class="price-row"><span class="price">390 ₽</span><span>+</span></div></div>
+      </article>
+      <article class="product-card">
+        <div class="product-visual"><div class="product-symbol">CLI</div></div>
+        <div class="product-body"><div class="product-meta">Программирование</div><h3>Учебный планировщик</h3><p class="muted">Небольшой консольный проект.</p><div class="price-row"><span class="price">790 ₽</span><span>+</span></div></div>
+      </article>
+      <article class="product-card">
+        <div class="product-visual"><div class="product-symbol">FS</div></div>
+        <div class="product-body"><div class="product-meta">Программирование</div><h3>Анализ файлов</h3><p class="muted">Утилита для подсчёта типов файлов.</p><div class="price-row"><span class="price">290 ₽</span><span>+</span></div></div>
+      </article>
+    </div>
+    <p id="emptySearch" class="muted" role="status" hidden>Товары не найдены.</p>
+  </section>
+
+  <div class="footer">
+    <span>MaxShop · учебная вёрстка ЛР7</span>
+    <span>Frontend-only · совместимо с GitHub Pages</span>
+  </div>
+</div>
+<script src="app.js"></script>
+</body></html>

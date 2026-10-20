@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#202522">
+<title>Кит Иммортал — MaxShop</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="chromatic">
+<div class="telegram-bar">
+  <div class="telegram-title"><span style="font-size:28px">×</span><span>MaxShop</span></div>
+  <div class="telegram-actions"><span>⌄</span><span>⋮</span></div>
+</div>
+
+<div class="app-shell">
+  <div class="notice demo-notice" role="note"><strong>Учебное демо.</strong> Оплата и выдача имитируются. Не отправляйте криптовалюту: адреса и QR-макет недействительны.</div>
+  <div class="topline">
+    <div class="brand">
+      <div class="logo">M</div>
+      <div><strong>MaxShop</strong><div class="small muted">цифровой магазин · Telegram Web App</div></div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <div class="theme-switch" title="Палитры из ЛР7">
+        <button onclick="setTheme('achromatic')">Ч/Б</button>
+        <button onclick="setTheme('chromatic')">60/30/10</button>
+        <button onclick="setTheme('triad')">Триада</button>
+      </div>
+      <a class="btn secondary" href="checkout.html">Корзина <span class="cart-badge">1</span></a>
+    </div>
+  </div>
+
+  <div class="breadcrumbs"><a href="index.html">Главная</a><span>→</span><a href="index.html#catalog">Каталог</a><span>→</span><span>Minecraft / DexLand</span></div>
+
+  <section class="product-layout">
+    <div class="product-hero"><div class="product-symbol">◆</div></div>
+    <div class="product-info">
+      <div class="eyebrow">Minecraft / DexLand</div>
+      <h1>Кит «Иммортал»</h1>
+      <p class="muted">Полный игровой комплект для уверенного старта и дальнейшей игры на сервере DexLand.</p>
+      <div class="specs">
+        <div class="spec"><span class="muted">Сервер</span><strong>DexLand</strong></div>
+        <div class="spec"><span class="muted">Тип</span><strong>Игровой товар</strong></div>
+        <div class="spec"><span class="muted">Состав</span><strong>Полный комплект</strong></div>
+        <div class="spec"><span class="muted">Выдача</span><strong>После подтверждения оплаты</strong></div>
+      </div>
+      <div class="price">1 290 ₽</div>
+      <div class="sticky-actions" style="margin-top:22px">
+        <button class="btn" onclick="addToCart()">Добавить в корзину →</button>
+        <a class="btn secondary" href="index.html#catalog">Назад</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="panel">
+      <div class="eyebrow">Как проходит покупка</div>
+      <h2>Короткий путь без регистрации</h2>
+      <p class="muted">Добавьте товар → укажите ник → выберите TON / USDT TON / USDT TRON → посмотрите демонстрационные реквизиты → запустите имитацию проверки → получите демонстрационный результат. Реальных платежей и выдачи нет.</p>
+    </div>
+  </section>
+
+  <div class="footer">
+    <span>MaxShop · учебная вёрстка ЛР7</span>
+    <span>Frontend-only · совместимо с GitHub Pages</span>
+  </div>
+</div>
+<script src="app.js"></script>
+</body></html>
