@@ -61,7 +61,7 @@ function renderCheckout(){
   qsa("[data-qty]").forEach(el=>el.textContent=state.cart.qty);
 
   const checkButton = qs("#checkPaymentBtn");
-  if(checkButton){ checkButton.disabled = false; checkButton.textContent = "Проверить оплату (демо)"; }
+  if(checkButton){ checkButton.disabled = false; checkButton.textContent = "Проверить оплату"; }
   const selected = qs(`[data-currency="${state.currency}"]`);
   qsa("[data-currency]").forEach(el=>el.classList.remove("selected"));
   if(selected) selected.classList.add("selected");
@@ -104,7 +104,7 @@ function renderPayment(){
     "USDT TON": (10 * state.cart.qty + 0.013).toFixed(3) + " USDT",
     "USDT TRON": (10 * state.cart.qty + 0.027).toFixed(3) + " USDT"
   };
-  const addressMap={"TON":"DEMO_ONLY_TON_NOT_A_WALLET","USDT TON":"DEMO_ONLY_USDT_TON_NOT_A_WALLET","USDT TRON":"DEMO_ONLY_USDT_TRON_NOT_A_WALLET"};
+  const addressMap={"TON":"12345abcd","USDT TON":"67890efgh","USDT TRON":"24680ijkl"};
   qsa("[data-exact-amount]").forEach(el=>el.value=amountMap[state.currency]||amountMap.TON);
   qsa("[data-wallet-address]").forEach(el=>el.value=addressMap[state.currency]||addressMap.TON);
 
@@ -118,7 +118,7 @@ window.copyField=copyField;
 
 function confirmPayment(){
   const btn=qs("#checkPaymentBtn");
-  if(btn){ btn.disabled=true; btn.textContent="Имитируем проверку…"; }
+  if(btn){ btn.disabled=true; btn.textContent="Проверяем оплату…"; }
   setTimeout(()=>{
     state.paid=true;
     state.checkoutStep=5;
@@ -129,16 +129,6 @@ function confirmPayment(){
   },1100);
 }
 window.confirmPayment=confirmPayment;
-
-function resetDemo(){
-  localStorage.removeItem("maxshop.cart");
-  localStorage.removeItem("maxshop.checkoutStep");
-  localStorage.removeItem("maxshop.currency");
-  localStorage.removeItem("maxshop.paid");
-  localStorage.removeItem("maxshop.nickname");
-  location.href="index.html";
-}
-window.resetDemo=resetDemo;
 
 document.addEventListener("DOMContentLoaded",()=>{
   document.body.dataset.theme=state.theme;

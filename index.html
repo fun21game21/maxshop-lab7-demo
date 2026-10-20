@@ -8,20 +8,15 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body data-theme="chromatic">
-<div class="telegram-bar">
-  <div class="telegram-title"><span style="font-size:28px">×</span><span>MaxShop</span></div>
-  <div class="telegram-actions"><span>⌄</span><span>⋮</span></div>
-</div>
 
 <div class="app-shell">
-  <div class="notice demo-notice" role="note"><strong>Учебное демо.</strong> Оплата и выдача имитируются. Не отправляйте криптовалюту: адреса и QR-макет недействительны.</div>
   <div class="topline">
     <div class="brand">
       <div class="logo">M</div>
-      <div><strong>MaxShop</strong><div class="small muted">цифровой магазин · Telegram Web App</div></div>
+      <div><strong>MaxShop</strong><div class="small muted">цифровой магазин</div></div>
     </div>
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-      <div class="theme-switch" title="Палитры из ЛР7">
+      <div class="theme-switch" title="Цветовая схема">
         <button onclick="setTheme('achromatic')">Ч/Б</button>
         <button onclick="setTheme('chromatic')">60/30/10</button>
         <button onclick="setTheme('triad')">Триада</button>
@@ -53,7 +48,7 @@
   </section>
 
   <section class="section" id="catalog">
-    <div class="section-head"><div><div class="eyebrow">Каталог</div><h2>Найдите своё</h2></div><span class="muted small">6 демонстрационных товаров</span></div>
+    <div class="section-head"><div><div class="eyebrow">Каталог</div><h2>Найдите своё</h2></div><span class="muted small">6 товаров</span></div>
     <div class="searchbar"><input class="input" id="search" aria-label="Поиск по каталогу" placeholder="Найти товар…"></div>
     <div class="chips">
       <button class="chip active">Все</button><button class="chip">Minecraft / DexLand</button><button class="chip">Программирование</button>
@@ -95,10 +90,6 @@
     <p id="emptySearch" class="muted" role="status" hidden>Товары не найдены.</p>
   </section>
 
-  <div class="footer">
-    <span>MaxShop · учебная вёрстка ЛР7</span>
-    <span>Frontend-only · совместимо с GitHub Pages</span>
-  </div>
 </div>
 <script src="app.js"></script>
 </body></html>

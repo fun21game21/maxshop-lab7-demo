@@ -8,19 +8,14 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body data-theme="chromatic">
-<div class="telegram-bar">
-  <div class="telegram-title"><span style="font-size:28px">×</span><span>MaxShop</span></div>
-  <div class="telegram-actions"><span>⌄</span><span>⋮</span></div>
-</div>
 <div class="app-shell">
-  <div class="notice demo-notice" role="note"><strong>Учебное демо.</strong> Оплата и выдача имитируются. Не отправляйте криптовалюту: адреса и QR-макет недействительны.</div>
   <div class="topline">
     <div class="brand">
       <div class="logo">M</div>
-      <div><strong>MaxShop</strong><div class="small muted">цифровой магазин · Telegram Web App</div></div>
+      <div><strong>MaxShop</strong><div class="small muted">цифровой магазин</div></div>
     </div>
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-      <div class="theme-switch" title="Палитры из ЛР7">
+      <div class="theme-switch" title="Цветовая схема">
         <button onclick="setTheme('achromatic')">Ч/Б</button>
         <button onclick="setTheme('chromatic')">60/30/10</button>
         <button onclick="setTheme('triad')">Триада</button>
@@ -60,7 +55,7 @@
 
       <section class="step-pane" data-step="3">
         <div class="eyebrow">Шаг 3</div><h1>Выберите валюту</h1>
-        <p class="muted">Показаны фиксированные учебные суммы. Реальный заказ и платёж не создаются.</p>
+        <p class="muted">Выберите удобную валюту и сеть для оформления заказа.</p>
         <div class="pay-options">
           <button class="pay-option selected" data-currency="TON" onclick="chooseCurrency('TON')"><span><strong>TON</strong><br><span class="muted small">Оплата в сети TON</span></span><strong>→</strong></button>
           <button class="pay-option" data-currency="USDT TON" onclick="chooseCurrency('USDT TON')"><span><strong>USDT TON</strong><br><span class="muted small">USDT в сети TON</span></span><strong>→</strong></button>
@@ -73,15 +68,15 @@
         <div id="payView">
           <div class="eyebrow">Шаг 4 · Заказ #128736</div>
           <h1>Оплата заказа</h1>
-          <p class="muted">Выбрана валюта: <strong data-currency-label></strong>. Сумма и адрес демонстрационные. Не отправляйте средства.</p>
+          <p class="muted">Выбрана валюта: <strong data-currency-label></strong>.</p>
+          <p class="muted small" role="note">Тестовая оплата — не переводите средства.</p>
           <div class="payment-box">
             <div>
-              <div class="copy-row"><label for="wallet"><strong>Демонстрационный адрес</strong></label><div class="copy-field"><input id="wallet" data-wallet-address class="input" readonly><button class="btn secondary" onclick="copyField('wallet',this)">Копировать</button></div></div>
-              <div class="copy-row"><label for="amount"><strong>Точная сумма (демо)</strong></label><div class="copy-field"><input id="amount" data-exact-amount class="input" readonly><button class="btn secondary" onclick="copyField('amount',this)">Копировать</button></div></div>
-              <div class="notice"><strong>Важно:</strong> это имитация проверки по таймеру. Подключения к кошелькам и блокчейну нет, реальные переводы не проверяются.</div>
-              <button id="checkPaymentBtn" class="btn full" style="margin-top:18px" onclick="confirmPayment()">Проверить оплату (демо)</button>
+              <div class="copy-row"><label for="wallet"><strong>Адрес кошелька</strong></label><div class="copy-field"><input id="wallet" data-wallet-address class="input" readonly><button class="btn secondary" onclick="copyField('wallet',this)">Копировать</button></div></div>
+              <div class="copy-row"><label for="amount"><strong>Точная сумма</strong></label><div class="copy-field"><input id="amount" data-exact-amount class="input" readonly><button class="btn secondary" onclick="copyField('amount',this)">Копировать</button></div></div>
+              <button id="checkPaymentBtn" class="btn full" style="margin-top:18px" onclick="confirmPayment()">Проверить оплату</button>
             </div>
-            <div><div class="qr" aria-label="Демонстрационный QR-код"></div><div class="muted small" style="text-align:center;margin-top:10px">QR-макет · не для оплаты</div></div>
+            <div><div class="qr" aria-hidden="true"></div></div>
           </div>
         </div>
       </section>
@@ -89,9 +84,8 @@
       <section class="step-pane" data-step="5" data-payment>
         <div id="successView" class="success">
           <div class="success-icon">✓</div>
-          <div class="eyebrow">Шаг 5 · Демонстрация завершена</div>
+          <div class="eyebrow">Шаг 5 · Готово</div>
           <h1>Заказ принят в обработку</h1>
-          <p class="muted">Имитация проверки завершена успешно. Реальный платёж не выполнялся; заказ и выдача показаны только для демонстрации.</p>
           <div class="order-card" style="text-align:left;max-width:720px;margin:26px auto 0">
             <div style="display:flex;justify-content:space-between;gap:16px;align-items:center">
               <div><strong>Кит «Иммортал»</strong><div class="muted small">Заказ #128736 · <span data-currency-label></span></div></div>
@@ -99,7 +93,6 @@
             </div>
             <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
               <a class="btn" href="index.html">Вернуться в магазин</a>
-              <button class="btn secondary" onclick="resetDemo()">Сбросить демо</button>
             </div>
           </div>
         </div>
@@ -111,14 +104,9 @@
       <div class="summary-line"><span data-cart-name></span><strong data-cart-price></strong></div>
       <div class="summary-line"><span>Количество</span><strong data-qty>1</strong></div>
       <div class="summary-line total"><span>Итого</span><span data-cart-total></span></div>
-      <div class="notice small" style="margin-top:16px">Три содержательные страницы сайта: главная/каталог, карточка товара, оформление. Полный путь продолжается внутри шагов этой страницы.</div>
     </aside>
   </div>
 
-  <div class="footer">
-    <span>MaxShop · учебная вёрстка ЛР7</span>
-    <span>Frontend-only · совместимо с GitHub Pages</span>
-  </div>
 </div>
 <script src="app.js"></script>
 </body></html>

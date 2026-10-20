@@ -34,12 +34,6 @@ button,a{transition:.18s ease}
 button{cursor:pointer}
 a{color:inherit;text-decoration:none}
 
-.telegram-bar{
-  height:58px;background:var(--tg);color:white;display:flex;align-items:center;
-  justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:30;
-}
-.telegram-title{display:flex;align-items:center;gap:12px;font-weight:800}
-.telegram-actions{display:flex;gap:22px;font-size:22px}
 .app-shell{max-width:1180px;margin:0 auto;padding:28px 20px 70px}
 .topline{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}
 .brand{display:flex;align-items:center;gap:12px}
@@ -172,7 +166,6 @@ textarea.input{min-height:98px;resize:vertical}
 .theme-switch button{
   border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:8px 10px;font-size:12px;color:var(--text)
 }
-.footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:var(--muted);font-size:13px}
 .small{font-size:12px}
 .hidden{display:none!important}
 
@@ -195,14 +188,12 @@ textarea.input{min-height:98px;resize:vertical}
   .cart-item{grid-template-columns:70px 1fr}
   .cart-item>.price{grid-column:2}
   .thumb{width:70px;height:66px}
-  .footer{flex-direction:column;gap:8px}
-  .payment-box{gap:18px}
+    .payment-box{gap:18px}
   .qr{width:190px;height:190px;margin:auto}
 }
 
 /* Keep the original layout usable on narrow screens. */
 [hidden]{display:none!important}
-.demo-notice{margin-bottom:24px}
 .flow-wrap>*,.payment-box>*,.copy-field .input{min-width:0}
 .breadcrumbs,.sticky-actions{flex-wrap:wrap}
 button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
